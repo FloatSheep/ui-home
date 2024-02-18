@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
+import path from "path";
 
 const rewriteSlashToIndexHtml = () => {
   return {
@@ -28,5 +29,13 @@ export default defineConfig({
       plugins: [tailwindcss, autoprefixer]
     }
   },
-  appType: 'mpa'
+  appType: 'mpa',
+    build: {
+      rollupOptions: {
+        input: {
+          index: path.resolve(__dirname, 'index.html'),
+          nested: path.resolve(__dirname, '404/index.html'),
+        }
+      }
+    }
 })
